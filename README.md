@@ -1,2 +1,2 @@
 # journalapp
-Django journaling application
+ Django journaling application
