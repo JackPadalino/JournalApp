@@ -1,0 +1,2 @@
+# journalapp
+Django journaling application
