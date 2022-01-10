@@ -3,18 +3,18 @@ from .models import NewEntry
 
 
 # Create your views here.
-def journalapphome(request):
+def journalhome(request):
     context = {
         'content':'Home page'
     }
     return render(request,'journal/home.html',context)
 
-def journal(request):
-    context = {
-        'title':'Journal',
-        'journal_entries':NewEntry.objects.all()
-    }
-    return render(request,'journal/entries.html',context)
+#def journal(request):
+#    context = {
+#        'title':'Journal',
+#        'journal_entries':NewEntry.objects.all()
+#    }
+#    return render(request,'journal/entries.html',context)
 
 def journaladdentry(request):
     context = {

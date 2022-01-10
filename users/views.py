@@ -34,3 +34,10 @@ def profile(request):
         'p_form':p_form
     }
     return render(request,'users/profile.html',context)
+
+@login_required
+def journal(request):    
+    context = {
+        'title':'Journal'
+    }
+    return render(request,'users/journal.html',context)
