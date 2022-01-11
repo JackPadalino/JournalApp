@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
+from .models import Entry
 
 # Create your views here.
 def register(request):
@@ -38,6 +39,7 @@ def profile(request):
 @login_required
 def journal(request):    
     context = {
-        'title':'Journal'
+        'title':'Journal',
+        'entries':Entry.objects.all()
     }
     return render(request,'users/journal.html',context)
