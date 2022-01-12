@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
-from .models import Entry
+#from .models import Entry
 from django.contrib.auth.models import User
 from django.views.generic import ListView
 
@@ -37,14 +37,3 @@ def profile(request):
         'p_form':p_form
     }
     return render(request,'users/profile.html',context)
-
-@login_required
-# in this view we are getting the current authenticated user, then filtering for entries made only by that user
-def journal(request):
-    user = request.user
-    context = {
-        'title':'My Journal',
-        #'entries':Entry.objects.all(),
-        'entries':Entry.objects.filter(author=user)
-    }
-    return render(request,'users/journal.html',context)
