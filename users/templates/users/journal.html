@@ -1,15 +1,14 @@
 {% extends "journal/base.html" %}
 {% block content %}
 {% for entry in entries %}
-    <div class="content-section">
-        <div class="media">
-            <div class="media-body">
-                <h2 class="account-heading">{{ entry.title }}</h2>
-                <h6>{{ entry.author }}</h6>
-                <h6>{{ entry.date_posted }}</h6>
-                <p class="text-secondary">{{ entry.content }}</p>
+        <div class="content-section">
+            <div class="media">
+                <div class="media-body">
+                    <h5>{{ entry.date_posted|date:"F d, Y" }}</h5>
+                    <h5>{{ entry.author }}</h5>
+                    <p class="text-secondary">{{ entry.content }}</p>
+                </div>
             </div>
         </div>
-    </div>
 {% endfor %}
 {% endblock content %}

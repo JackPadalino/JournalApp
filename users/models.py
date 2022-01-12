@@ -23,8 +23,6 @@ class Entry(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
-    #this sets the reltionship between posts and authors, called a 'one to many' relationship
-    #by saying 'on_delete = models.CASCADE' we are saying that 'on the deletion of a user, delete all their entries too'
     author = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
