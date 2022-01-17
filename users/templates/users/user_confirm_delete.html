@@ -5,7 +5,7 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Delete Account</legend>
-                <h2>Are you sure you want to delete the account for {{ object.username }}?</h2>
+                <h4>Are you sure you want to delete the account for <u>{{ object.username }}</u>?</h4>
             </fieldset>
             <br>
             <div class='form-group'>
