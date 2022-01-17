@@ -5,6 +5,7 @@ from .models import Entry
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.urls import reverse_lazy
 
 # Create your views here.
 def journalhome(request):
@@ -77,7 +78,7 @@ class EntryUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 class EntryDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Entry
-    success_url = '/journal/'
+    success_url = reverse_lazy('journal')
     
     # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
     def test_func(self):

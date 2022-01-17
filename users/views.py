@@ -2,12 +2,15 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,UserUpdateForm,ProfileUpdateForm
-#from .models import Entry
+from django.views.generic import DeleteView
+from .models import Profile
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 
 # Create your views here.
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -38,3 +41,17 @@ def profile(request):
         'p_form':p_form
     }
     return render(request,'users/profile.html',context)
+
+class UserDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model = User
+    template_name = 'users/user_confirm_delete.html'
+    success_url = reverse_lazy('register')
+    success_message = "Your profile was successfully deleted."
+
+    # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
+    def test_func(self):
+        user = self.get_object()
+        if self.request.user.id == user.id:
+            return True
+        else:
+            return False
