@@ -12,12 +12,16 @@ body {
     margin: 0;
   }
   
-  .bg-steel {
+  /*.bg-steel {
     background-color: #5f788a;
+  }*/
+
+  .main-navigation-bar {
+    background-color: rgb(53, 112, 168);
   }
   
   .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+    color: #ffffff;
   }
   
   .site-header .navbar-nav .nav-link:hover {
@@ -34,6 +38,8 @@ body {
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
+    margin-top: 10px;
+    box-shadow: 5px 5px 7px grey;
   }
   
   .article-title {
@@ -83,4 +89,8 @@ body {
   
   .account-heading {
     font-size: 2.5rem;
+  }
+
+  .new-entry{
+    margin-bottom:20px;
   }

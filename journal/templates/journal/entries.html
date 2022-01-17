@@ -1,19 +1,10 @@
 {% extends 'journal/base.html' %}
 {% block content %}
-<!--<div class='container'>
-    <h1>{{ title }}</h1>
-</div>
-<div class='container'>
-    <a class="btn btn-primary" href="{% url 'journal-addentry' %}" role="button">New entry</a>
-</div>
-<br />-->
 {% for entry in journal_entries %}
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
-                <!--<h3>{{ entry.entry_name }}</h3>
-                <small>{{ entry.date_posted|date:"F j, Y" }}</small>-->
-                <h4>{{ entry.date_posted|date:"F j, Y" }}</h4>
+                <h4><a class="article-title" href="{% url 'entry-details' entry.id %}">{{ entry.date_posted|date:"F j, Y" }}</a></h4>
             </div>
             <p class="article-content">{{ entry.content }}</p>
         </div>

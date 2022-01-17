@@ -21,7 +21,7 @@
 
 <body>
     <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark main-navigation-bar fixed-top">
             <div class="container">
                 <a class="navbar-brand mr-4" href="{% url 'journalhome' %}">JournalApp</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,7 @@
                     <div class="navbar-nav mr-auto">
                         {% if user.is_authenticated %}
                             <a class="nav-item nav-link" href="{% url 'journal' %}">My Journal</a>
+                            <a class="nav-item nav-link" href="{% url 'new-entry' %}">New Entry</a>
                         {% else %}
                             <span></span>
                         {% endif %}
@@ -61,8 +62,12 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-                {% block content %}{% endblock %}
+                
+                {% block content %}
+                <!--other html templates being passed in here!-->
+                {% endblock %}
             </div>
+
             <!--
             <div class="col-md-4">
                 <div class="content-section">
@@ -79,7 +84,10 @@
             </div>
             -->
         </div>
+
+
     </main>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

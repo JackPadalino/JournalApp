@@ -1,13 +1,17 @@
 {% extends "journal/base.html" %}
 {% block content %}
-{% for entry in entries %}
-        <div class="content-section">
-            <div class="media">
-                <div class="media-body">
-                    <h5>{{ entry.date_posted|date:"F d, Y" }}</h5>
-                    <p class="text-secondary">{{ entry.content }}</p>
+{% if entries %}
+    {% for entry in entries %}
+            <div class="content-section">
+                <div class="media">
+                    <div class="media-body">
+                        <h4><a class="article-title" href="{% url 'entry-details' entry.id %}">{{ entry.date_posted|date:"F j, Y" }}</a></h4>
+                        <p class="text-secondary">{{ entry.content }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <h2>You don't have any entries yet!</h2>
+{% endif %}
 {% endblock content %}
