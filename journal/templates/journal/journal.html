@@ -2,14 +2,14 @@
 {% block content %}
 {% if entries %}
     {% for entry in entries %}
-            <div class="content-section">
-                <div class="media">
-                    <div class="media-body">
-                        <h4><a class="article-title" href="{% url 'entry-details' entry.id %}">{{ entry.date_posted|date:"F j, Y" }}</a></h4>
-                        <p class="text-secondary">{{ entry.content }}</p>
-                    </div>
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h4><a class="article-title" href="{% url 'entry-details' entry.id %}">{{ entry.date_posted|date:"F j, Y" }}</a></h4>
                 </div>
+                <p class="article-content">{{ entry.content }}</p>
             </div>
+        </article>
     {% endfor %}
 {% else %}
     <h2>You don't have any entries yet!</h2>

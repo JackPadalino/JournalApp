@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Entry
 from django.views.generic import ListView,DetailView,CreateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def journalhome(request):
@@ -46,3 +47,11 @@ class EntryListView(ListView):
 class EntryDetailView(DetailView):
     model = Entry
     template_name ='journal/entry.html'
+
+class EntryCreateView(LoginRequiredMixin,CreateView):
+    model = Entry
+    fields = ['content']
+
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
