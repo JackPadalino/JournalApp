@@ -2,9 +2,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Entry
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 # Create your views here.
 def journalhome(request):
@@ -28,12 +28,14 @@ def journal(request):
     return render(request,'journal/journal.html',context)
 '''
 
+'''
 @login_required
 def new_entry(request):
     context = {
         'title':'New Entry'
     }
     return render(request,'journal/newentry.html',context)
+'''
 
 # here we are going to make a 'class view' that will render a page that allows user to CRUD posts
 class EntryListView(ListView):
@@ -46,7 +48,7 @@ class EntryListView(ListView):
 
 class EntryDetailView(DetailView):
     model = Entry
-    template_name ='journal/entry.html'
+    template_name ='journal/entry_details.html'
 
 class EntryCreateView(LoginRequiredMixin,CreateView):
     model = Entry
@@ -55,3 +57,32 @@ class EntryCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class EntryUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = Entry
+    fields = ['content']
+
+    # this form_valid function sets the author of the updated post to be the current logged in user
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
+
+class EntryDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model = Entry
+    success_url = '/journal/'
+    
+    # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
