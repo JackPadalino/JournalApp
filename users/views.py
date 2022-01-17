@@ -48,7 +48,7 @@ class UserDeleteView(SuccessMessageMixin,LoginRequiredMixin,UserPassesTestMixin,
     success_url = reverse_lazy('register')
     success_message = "Your profile was successfully deleted."
 
-    # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
+    # this test_func function checks to make that the current logged in user has the same ID as the profile we are trying to delete
     def test_func(self):
         user = self.get_object()
         if self.request.user.id == user.id:
