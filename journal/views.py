@@ -78,6 +78,7 @@ class EntryUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 
 class EntryDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Entry
+    template_name = 'journal/entry_confirm_delete.html'
     success_url = reverse_lazy('journal')
     
     # this test_func function checks to make that the current logged in user is the author of a post before allowing to update
