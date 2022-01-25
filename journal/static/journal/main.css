@@ -94,3 +94,15 @@ body {
   .new-entry{
     margin-bottom:20px;
   }
+
+  .paginate-button{
+    background-color:rgb(53, 112, 168) !important;
+    color:white !important;
+    border-color:rgb(53, 112, 168) !important;
+  }
+
+  .current-paginate-button{
+    background-color:white !important;
+    border-color:rgb(53, 112, 168) !important;
+    color:rgb(53, 112, 168) !important;
+  }
