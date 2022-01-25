@@ -1,5 +1,5 @@
 #from typing_extensions import Required
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.models import User
 from .models import Entry
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
@@ -46,6 +46,7 @@ class EntryListView(ListView):
         return entries
     template_name = 'journal/journal.html'
     context_object_name = 'entries'
+    paginate_by = 5
 
 class EntryDetailView(DetailView):
     model = Entry
